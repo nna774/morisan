@@ -6,12 +6,12 @@ REGION = ENV['REGION']
 
 def handler(event:, context:)
   body = {}
-	body[:type] = 'slack'
+  body[:type] = 'slack'
   body[:text] = event['text']
   body[:channel] = event['channel'] if event['channel']
   body[:icon_url] = event['icon_url'] if event['icon_url']
   body[:icon_emoji] = event['icon_emoji'] if event['icon_emoji']
- 	body[:username] = event['username'] if event['username'] 
+  body[:username] = event['username'] if event['username']
   sqs = Aws::SQS::Client.new(region: REGION)
   res = sqs.send_message({
     queue_url: QUEUE_URL,
